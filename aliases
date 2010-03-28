@@ -1,0 +1,9 @@
+alias grep="grep --color"
+alias egrep="egrep --color"
+
+alias tailf="tail -f"
+alias l="ls"
+alias la="ls -a"
+alias ll="ls -lah"
+
+alias r="rails"

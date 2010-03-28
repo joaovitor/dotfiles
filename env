@@ -1,0 +1,33 @@
+export EDITOR="mate -w"
+
+# mysql
+export PATH=/usr/local/mysql/bin:$PATH
+
+# rvm
+if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
+
+# preserve last path on new tabs
+cd () { 
+  builtin cd "$@";
+  local cwd;
+  cwd=$(pwd);
+  while :; do
+    if [[ -z "$cwd" ]] || [[ "$HOME" = "$cwd" ]] || [[ "/" = "$cwd" ]]; then
+      if [[ "$rvm_project_rvmrc_default" = 1 ]]; then
+        rvm default > /dev/null 2>&1;
+      fi;
+      break;
+    else
+      if [[ -f "$cwd/.rvmrc" ]]; then
+        source "$cwd/.rvmrc";
+        break;
+      else
+        cwd=$(dirname "$cwd");
+      fi;
+    fi;
+  done
+
+  echo $PWD > ~/.pwd;
+}
+
+if [[ -f ~/.pwd ]] ; then cd `cat ~/.pwd` ; fi
