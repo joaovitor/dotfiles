@@ -1,7 +1,7 @@
-export EDITOR="mate -w"
 
 # mysql
 export PATH=/usr/local/mysql/bin:$PATH
+export EDITOR="vim"
 
 # rvm
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
