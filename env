@@ -2,6 +2,7 @@
 # mysql
 export PATH=/usr/local/mysql/bin:$PATH
 export EDITOR="vim"
+export MANPAGER='less -Xr'
 
 # rvm
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
