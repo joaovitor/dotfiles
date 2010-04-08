@@ -1,0 +1,10 @@
+Dotfiles to setup a bash environment.
+This directory needs to be in $HOME/dotfiles
+
+cd ~
+mkdir github-projects
+cd github-projects
+git clone git://github.com/joaovitor/dotfiles.git
+cd ~
+ln -s github-projects/dotfiles
+ln -s dotfiles/bash_profile .bash_profile
