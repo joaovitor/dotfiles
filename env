@@ -32,3 +32,19 @@ cd () {
 }
 
 if [[ -f ~/.pwd ]] ; then cd `cat ~/.pwd` ; fi
+
+# User specific environment and startup programs
+for i in $HOME/dotfiles/profile.d/*.sh ; do
+    if [ -x "$i" ]; then
+        . $i
+    fi
+done
+
+# Project specific environment and startup programs
+for i in $HOME/dotfiles/projects.d/*.sh ; do
+    if [ -x "$i" ]; then
+        . $i
+    fi
+done
+
+export PATH=$HOME/bin:$PATH
