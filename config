@@ -52,4 +52,8 @@ __ruby_version() {
   which ruby | cut -d/ -f6
 }
 
-PS1="\n\w $RED\$(__git_ps1 ' [%s] ')$YELLOW[\$(__ruby_version)] \n$RESET\$ "
+__gemset () {
+  echo $GEM_PATH | cut -d% -f2
+}
+
+PS1="\n\w $GREEN\$(__git_ps1 ' [%s] ')$YELLOW[\$(__ruby_version)] $BLUE[\$(__gemset)] \n$RESET\$ "
