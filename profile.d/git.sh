@@ -6,5 +6,6 @@ alias gd='git diff'
 alias gci='git commit --interactive'
 alias ga='gitk --all'
 alias gmt='git mergetool'
+alias gx='gitx'
 
 alias upb='git checkout production && git merge origin/master && git push && git checkout master'
