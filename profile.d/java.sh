@@ -16,9 +16,9 @@ export    MVN_HOME=$JAVA_PROG_DIR/maven
 #export  JRUBY_HOME=$JAVA_LANG_DIR/jruby
 #export TOMCAT_HOME=$JAVA_SERVERS_DIR/tomcat
 
-#export PATH=$JAVA_HOME/bin:$PATH
-#export PATH=$ANT_HOME/bin:$PATH
-#export PATH=$MVN_HOME/bin:$PATH
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$ANT_HOME/bin:$PATH
+export PATH=$MVN_HOME/bin:$PATH
 #export PATH=$SCALA_HOME/bin:$PATH
 #export PATH=$GROOVY_HOME/bin:$PATH
 #export PATH=$JRUBY_HOME/bin:$PATH
