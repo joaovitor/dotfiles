@@ -7,6 +7,7 @@ alias gl='git pull'
 alias gci='git commit --interactive'
 alias ga='gitk --all'
 alias gmt='git mergetool'
-alias gx='gitx'
+alias gx='gitx' 
+alias gg='gitg' 
 
 alias upb='git checkout production && git merge origin/master && git push && git checkout master'
