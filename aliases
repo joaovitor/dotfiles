@@ -5,6 +5,7 @@ alias tailf="tail -f"
 alias l="ls"
 alias la="ls -a"
 alias ll="ls -lah"
+alias ls="ls --color=auto"
 
 # secure your moviments and commands
 alias mv="mv -i"
