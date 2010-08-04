@@ -18,6 +18,7 @@ alias ss="script/server"
 alias sc="script/console"
 alias r="rails"
 alias gib="gem install bundler"
+alias gibp="gem install bundler --pre"
 alias bi="bundle install"
 alias bir="bundle install --relock"
 
