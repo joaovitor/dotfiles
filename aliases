@@ -20,6 +20,7 @@ alias r="rails"
 alias gib="gem install bundler"
 alias gibp="gem install bundler --pre"
 alias bi="bundle install"
+alias bu="bundle update"
 alias bir="bundle install --relock"
 
 # vim aliases
