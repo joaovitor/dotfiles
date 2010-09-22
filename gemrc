@@ -3,8 +3,7 @@
 :update_sources: true
 gem: --no-ri --no-rdoc
 install: --env-shebang
-gemcutter_key: 66...cf
-:sources: 
+:sources:
 - http://gemcutter.org
 - http://gems.rubyforge.org/
 - http://gems.github.com/
