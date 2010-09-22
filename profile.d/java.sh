@@ -1,6 +1,7 @@
 #!/bin/sh
 
 JAVA_LIB_DIR=$HOME/programs/java/lib
+JAVA_SDK_DIR=$HOME/programs/java/sdks
 JAVA_LANG_DIR=$HOME/programs/java/languages
 JAVA_PROG_DIR=$HOME/programs/java/programs
 JAVA_SERVERS_DIR=$HOME/programs/java/servers
@@ -24,3 +25,6 @@ export PATH=$MVN_HOME/bin:$PATH
 #export PATH=$JRUBY_HOME/bin:$PATH
 #export PATH=$GRAILS_HOME/bin:$PATH
 #export PATH=$PATH:$ROO_HOME/bin:$PATH
+
+export ANDROID_HOME=$JAVA_SDK_DIR/android
+export PATH=$ANDROID_HOME/tools:$PATH
