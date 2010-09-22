@@ -22,7 +22,3 @@ alias gibp="gem install bundler --pre"
 alias bi="bundle install"
 alias bu="bundle update"
 alias bir="bundle install --relock"
-
-# vim aliases
-alias mvim="/Applications/mvim"
-alias vim="/Applications/mvim"
