@@ -4,7 +4,7 @@ namespace :dotfiles do
     home_dir = ENV['HOME']
     dotfiles_dir = File.expand_path(File.dirname(__FILE__))
     options = {:noop => false, :verbose => true}
-    %W(bash_profile gemrc gitignore ackrc irbrc).each do |file|
+    %W(bash_profile gemrc gitignore ackrc irbrc infinity_test).each do |file|
       original_path = File.join(dotfiles_dir, file)
       link_path = File.join(home_dir, ".#{file}")
       unless(File.exists?(link_path))

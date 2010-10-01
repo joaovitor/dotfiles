@@ -1,0 +1,11 @@
+infinity_test do
+  notifications :growl do
+    show_images :mode => :faces
+  end
+
+  use :test_framework => :rspec
+
+  before_run do
+    clear :terminal
+  end
+end
