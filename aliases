@@ -1,5 +1,6 @@
 alias grep="grep --color"
 alias egrep="egrep --color"
+alias less="less -Xr"
 
 alias tailf="tail -f"
 alias l="ls"
