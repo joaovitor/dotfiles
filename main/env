@@ -8,7 +8,7 @@ export MANPAGER='less -Xr'
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
 # preserve last path on new tabs
-cd () { 
+cd () {
   builtin cd "$@";
   local cwd;
   cwd=$(pwd);
@@ -42,6 +42,13 @@ done
 
 # Project specific environment and startup programs
 for i in $HOME/dotfiles/projects.d/*.sh ; do
+    if [ -x "$i" ]; then
+        . $i
+    fi
+done
+
+# Bash completion hooks
+for i in $HOME/dotfiles/bash-completion.d/*.sh ; do
     if [ -x "$i" ]; then
         . $i
     fi

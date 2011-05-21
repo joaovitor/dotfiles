@@ -4,7 +4,7 @@ export CLICOLOR="auto"
 # colors
 DULL=0
 BRIGHT=1
- 
+
 FG_BLACK=30
 FG_RED=31
 FG_GREEN=32
@@ -14,7 +14,7 @@ FG_VIOLET=35
 FG_CYAN=36
 FG_WHITE=37
 FG_NULL=00
- 
+
 BG_BLACK=40
 BG_RED=41
 BG_GREEN=42
@@ -24,12 +24,12 @@ BG_VIOLET=45
 BG_CYAN=46
 BG_WHITE=47
 BG_NULL=00
- 
+
 # ANSI Escape Commands
 ESC="\033"
 NORMAL="\[$ESC[m\]"
 RESET="\[$ESC[${DULL};${FG_WHITE};${BG_NULL}m\]"
- 
+
 BLACK="\[$ESC[${DULL};${FG_BLACK}m\]"
 RED="\[$ESC[${DULL};${FG_RED}m\]"
 GREEN="\[$ESC[${DULL};${FG_GREEN}m\]"
@@ -65,4 +65,4 @@ export HISTCONTROL=ignoreboth
 shopt -s histappend
 PROMPT_COMMAND='history -a'
 export HISTSIZE=100000
-PS1="\n\w $GREEN\$(__git_ps1 ' [%s] ')$YELLOW[\$(__ruby_version)] $BLUE[\$(__gemset)] \n$RESET\$ "
+PS1="\n\w $GREEN\$(__git_ps1 ' [%s] ')$YELLOW[\$(__ruby_version)] $BRIGHT_BLUE[\$(__gemset)] $BRIGHT_RED[\t] \n$RESET\$ "

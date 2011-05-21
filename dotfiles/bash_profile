@@ -1,0 +1,3 @@
+source ~/dotfiles/main/env
+source ~/dotfiles/main/config
+source ~/dotfiles/main/aliases
