@@ -2,16 +2,12 @@ namespace :dotfiles do
   desc "install it linking all the files"
   task :install do
     home_dir = ENV['HOME']
-    dotfiles_dir = File.expand_path(File.join(File.dirname(__FILE__), 'dotfiles'))
     options = {:noop => false, :verbose => true, :force => true}
-    %W(bash_profile gemrc gitignore ackrc irbrc infinity_test janus.rake vimrc.local).each do |file|
-      original_path = File.join(dotfiles_dir, file)
+    Dir.glob("dotfiles/**").each do |file_path|
+      file = File.basename(file_path)
+      original_path = File.expand_path(file_path)
       link_path = File.join(home_dir, ".#{file}")
-      unless(File.exists?(link_path))
-        FileUtils.ln_s(original_path, link_path, options)
-      else
-        puts "#{link_path} \t already exists on your system"
-      end
+      FileUtils.ln_s(original_path, link_path, options)
     end
   end
 end
