@@ -1,3 +1,5 @@
 "map to fuzzyfinder buffer"
 nnoremap <C-b> :FufBuffer<cr>
 nnoremap <C-f> :AckFromSearch<cr>
+map   <silent> <F5> mmgg=G'm
+imap  <silent> <F5> <Esc> mmgg=G'm
