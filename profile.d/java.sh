@@ -27,7 +27,7 @@ export PATH=$GRADLE_HOME/bin:$PATH
 export PATH=$SCALA_HOME/bin:$PATH
 export PATH=$GROOVY_HOME/bin:$PATH
 export PATH=$GRAILS_HOME/bin:$PATH
-export PATH=$PATH:$ROO_HOME/bin:$PATH
+export PATH=$ROO_HOME/bin:$PATH
 
 export ANDROID_HOME=$JAVA_SDK_DIR/android
 export PATH=$ANDROID_HOME/tools:$PATH
