@@ -1,3 +1,6 @@
 .DS_Store
 *sw?
 .rvmrc
+Thumbs.db
+NERD_tree_3
+.rspec
