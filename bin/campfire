@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+gem     'tinder'
+require 'tinder'
+
+filename = ARGV.first
+content = if filename.present? and File.file?(filename)
+            File.read(filename)
+          else
+            ARGF.read
+          end
+exit 1 if content.blank?
+
+config = YAML.load(File.read(ENV["HOME"] + "/.campfire.yml")) 
+campfire = Tinder::Campfire.new(config['campfire_domain'], :token => config['campfire_token'], :ssl => true)
+room = campfire.find_room_by_name(config['campfire_room'])
+room.paste content
+
