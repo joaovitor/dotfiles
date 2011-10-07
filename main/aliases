@@ -24,7 +24,7 @@ alias gibp="gem install bundler --pre"
 alias bi="bundle install"
 alias bu="bundle update"
 alias bx="bundle exec"
-alias bs="bundle exec rspec spec"
+alias bs="bundle exec rspec"
 alias bir="bundle install --relock"
 
 alias v='mvim'
