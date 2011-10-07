@@ -8,10 +8,12 @@
 --type-set=log=.log,.1
 --type-set=cgi=.cgi,.fcgi
 --type-set=plist=.plist
+--type-set=filelist=.filelist
 --type-set=tmstuff=.tmproj,.tm_build_errors
 --type-set=bin=.pdf,.tar.gz,.zip,.png,.cache,.svg
 --nonib
 --notmstuff
+--nofilelist
 --noxcode
 --nosphinx
 --nobin
