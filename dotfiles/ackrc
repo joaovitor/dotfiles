@@ -1,6 +1,6 @@
 --type-add=objc=.pch
 --type-add=ruby=.yml,.haml,.rake,.feature
---type-add=css=.scss,.less
+--type-add=css=.sass,.scss,.less
 --type-set=xcode=.pbxproj,.pbxuser,.perspectivev3
 --type-set=ragel=.rl
 --type-set=sphinx=.spa,.spd,.sph,.spi,.spk,.spm,.spp
