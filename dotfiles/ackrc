@@ -1,5 +1,5 @@
 --type-add=objc=.pch
---type-add=ruby=.yml,.haml,.rake,.feature
+--type-add=ruby=.rb,.yml,.haml,.rake,.feature
 --type-add=css=.sass,.scss,.less
 --type-set=xcode=.pbxproj,.pbxuser,.perspectivev3
 --type-set=ragel=.rl
