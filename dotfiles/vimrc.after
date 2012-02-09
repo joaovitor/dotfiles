@@ -1,0 +1,17 @@
+" Default color scheme
+set background=dark
+colorscheme candycode
+set guifont=Menlo\ Regular:h16
+
+" ack.vim
+nmap <silent> <unique> <Leader>as :AckFromSearch
+
+" format file
+map   <silent> <F5> mmgg=G'm
+imap  <silent> <F5> <Esc> mmgg=G'm
+
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l

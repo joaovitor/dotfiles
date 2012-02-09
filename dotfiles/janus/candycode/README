@@ -1,0 +1,8 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1635
+
+This is my personal colorscheme, which I've been carefully tweaking over the past couple years.  It uses a (nearly) black background contrasted with bright pastel colors, which I think are easy to read and rather purty, too.  I don't know of any colorschemes that are too similar, but then again I've only seen a fraction of the huge number that are out there.
+
+HTML "screenshot": http://goflyapig.googlepages.com/candycodesample.html
+PNG screenshot: http://img98.imageshack.us/img98/9297/screenshotcandycodevimvimcolorsgvim1ki2.png
+
+Optimized for the GUI version, but color terminal settings are included, too.
