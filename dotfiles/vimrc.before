@@ -1,3 +1,5 @@
+call janus#disable_plugin('vim-buffergator')
+
 if has("gui_running")
   set guioptions-=T
   "set guioptions=egmrt

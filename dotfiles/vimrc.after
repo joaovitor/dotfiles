@@ -3,6 +3,9 @@ set background=dark
 colorscheme candycode
 set guifont=Menlo\ Regular:h16
 
+" fufbuffer
+nnoremap <Leader>b :FufBuffer<cr>
+
 " ack.vim
 nmap <silent> <unique> <Leader>as :AckFromSearch
 
