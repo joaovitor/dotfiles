@@ -4,3 +4,8 @@
 Thumbs.db
 NERD_tree_3
 .rspec
+*.orig
+.classpath
+.project
+.settings
+target
