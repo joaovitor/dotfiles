@@ -1,7 +1,13 @@
 " Default color scheme
-set background=dark
-colorscheme candycode
-set guifont=Menlo\ Regular:h16
+if has("gui_running")
+  set background=dark
+  colorscheme candycode
+  set guifont=Menlo\ Regular:h14
+else
+  set background=light
+  colorscheme solarized
+  set guifont=Menlo\ Regular:h14
+endif
 
 " fufbuffer
 nnoremap <Leader>b :FufBuffer<cr>
