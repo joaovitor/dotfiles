@@ -18,3 +18,17 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+" taken from: http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim/1618401#1618401
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+
+" auto-strip trailing white space for ruby files
+" autocmd BufWritePre *.rb :call <SID>StripTrailingWhitespaces()
+
+" command to strip white space from any file
+nnoremap <leader>s :call <SID>StripTrailingWhitespaces()<cr>
