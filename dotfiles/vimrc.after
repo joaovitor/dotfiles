@@ -7,7 +7,7 @@ set guifont=Menlo\ Regular:h16
 nnoremap <Leader>b :FufBuffer<cr>
 
 " ack.vim
-nmap <silent> <unique> <Leader>as :AckFromSearch
+nmap <silent> <unique> <Leader>as :AckFromSearch<cr>
 
 " format file
 map   <silent> <F5> mmgg=G'm
