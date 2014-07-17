@@ -3,23 +3,34 @@
 " Version:      2.0
 " GetLatestVimScripts: 1896 1 :AutoInstall: ragtag.vim
 
-if exists("g:loaded_ragtag") || &cp
+if exists("g:loaded_ragtag") || &cp || v:version < 700
   finish
 endif
 let g:loaded_ragtag = 1
 
-if has("autocmd")
-  augroup ragtag
-    autocmd!
-    autocmd FileType *html*,wml,jsp                 call s:Init()
-    autocmd FileType php,asp*,cf,mason,eruby,liquid call s:Init()
-    autocmd FileType xml,xslt,xsd,docbk             call s:Init()
-    if version >= 700
-      autocmd InsertLeave * call s:Leave()
-    endif
-    autocmd CursorHold * if exists("b:loaded_ragtag") | call s:Leave() | endif
-  augroup END
+if !exists('g:html_indent_inctags')
+  let g:html_indent_inctags = 'body,head,html,tbody,p,li,dt,dd'
 endif
+if !exists('g:html_indent_autotags')
+  let g:html_indent_autotags = 'wbr'
+endif
+if !exists('g:html_indent_script1')
+  let g:html_indent_script1 = 'inc'
+endif
+if !exists('g:html_indent_style1')
+  let g:html_indent_style1 = 'inc'
+endif
+
+augroup ragtag
+  autocmd!
+  autocmd BufReadPost * if ! did_filetype() && getline(1)." ".getline(2).
+        \ " ".getline(3) =~? '<\%(!DOCTYPE \)\=html\>' | setf html | endif
+  autocmd FileType *html*,wml,jsp,gsp,mustache,smarty call s:Init()
+  autocmd FileType php,asp*,cf,mason,eruby,liquid,jst call s:Init()
+  autocmd FileType xml,xslt,xsd,docbk                 call s:Init()
+  autocmd InsertLeave * call s:Leave()
+  autocmd CursorHold * if exists("b:loaded_ragtag") | call s:Leave() | endif
+augroup END
 
 inoremap <silent> <Plug>ragtagHtmlComplete <C-R>=<SID>htmlEn()<CR><C-X><C-O><C-P><C-R>=<SID>htmlDis()<CR><C-N>
 
@@ -53,8 +64,8 @@ function! s:Init()
   imap     <buffer> <C-X>H <SID>HtmlComplete
   inoremap <silent> <buffer> <C-X>$ <C-R>=<SID>javascriptIncludeTag()<CR>
   inoremap <silent> <buffer> <C-X>@ <C-R>=<SID>stylesheetTag()<CR>
-  inoremap <silent> <buffer> <C-X><Space> <Esc>ciw<Lt><C-R>"<C-R>=<SID>tagextras()<CR>></<C-R>"><Esc>b2hi
-  inoremap <silent> <buffer> <C-X><CR> <Esc>ciw<Lt><C-R>"<C-R>=<SID>tagextras()<CR>><CR></<C-R>"><Esc>O
+  inoremap <silent> <buffer> <C-X><Space> <Esc>ciW<Lt><C-R>"<C-R>=<SID>tagextras()<CR>></<C-R>"><Esc>F<i
+  inoremap <silent> <buffer> <C-X><CR> <Esc>ciW<Lt><C-R>"<C-R>=<SID>tagextras()<CR>><CR></<C-R>"><Esc>O
   if exists("&omnifunc")
     inoremap <silent> <buffer> <C-X>/ <Lt>/<C-R>=<SID>htmlEn()<CR><C-X><C-O><C-R>=<SID>htmlDis()<CR><C-F>
     if exists(":XMLns")
@@ -71,9 +82,9 @@ function! s:Init()
   if &ft == "php"
     inoremap <buffer> <C-X><Lt> <?php
     inoremap <buffer> <C-X>>    ?>
-    inoremap <buffer> <SID>ragtagOopen    <?php<Space>print<Space>
+    inoremap <buffer> <SID>ragtagOopen    <?php<Space>echo<Space>
     let b:surround_45 = "<?php \r ?>"
-    let b:surround_61 = "<?php print \r ?>"
+    let b:surround_61 = "<?php echo \r ?>"
   elseif &ft == "htmltt" || &ft == "tt2html"
     inoremap <buffer> <C-X><Lt> [%
     inoremap <buffer> <C-X>>    %]
@@ -82,6 +93,13 @@ function! s:Init()
     if !exists("b:surround_101")
       let b:surround_101 = "[% \r %]\n[% END %]"
     endif
+  elseif &ft == "mustache"
+    inoremap <buffer> <SID>ragtagOopen    {{<Space>
+    inoremap <buffer> <SID>ragtagOclose   <Space>}}<Left><Left>
+    inoremap <buffer> <C-X><Lt> {{
+    inoremap <buffer> <C-X>>    }}
+    let b:surround_45 = "{{ \r }}"
+    let b:surround_61 = "{{ \r }}"
   elseif &ft =~ "django" || &ft == "liquid" || &ft == 'htmljinja'
     inoremap <buffer> <SID>ragtagOopen    {{<Space>
     inoremap <buffer> <SID>ragtagOclose   <Space>}}<Left><Left>
@@ -103,6 +121,13 @@ function! s:Init()
     inoremap <buffer> <C-X>>    >
     let b:surround_45 = "<cf\r>"
     let b:surround_61 = "<cfoutput>\r</cfoutput>"
+  elseif &ft =~ '\<smarty\>'
+    inoremap <buffer> <SID>ragtagOopen    {
+    inoremap <buffer> <SID>ragtagOclose   }
+    inoremap <buffer> <C-X><Lt> {
+    inoremap <buffer> <C-X>>    }
+    let b:surround_45 = "{\r}"
+    let b:surround_61 = "{\r}"
   else
     inoremap <buffer> <SID>ragtagOopen    <%=<Space>
     inoremap <buffer> <C-X><Lt> <%
@@ -123,12 +148,15 @@ function! s:Init()
     imap     <buffer> <C-X>] <C-X><Lt><CR><C-X>><Esc>O
   endif
   " <% %>
-  if &ft =~ '\<eruby\>'
-    inoremap  <buffer> <C-X>- <%<Space><Space>-%><Esc>3hi
-    inoremap  <buffer> <C-X>_ <C-V><NL><Esc>I<%<Space><Esc>A<Space>-%><Esc>F<NL>s
+  if &ft =~ '\<eruby\>' || &ft == "jst"
+    inoremap  <buffer> <C-X>- <%<Space><Space>%><Esc>2hi
+    inoremap  <buffer> <C-X>_ <C-V><NL><Esc>I<%<Space><Esc>A<Space>%><Esc>F<NL>s
   elseif &ft == "cf"
     inoremap  <buffer> <C-X>- <cf><Left>
     inoremap  <buffer> <C-X>_ <cfset ><Left>
+  elseif &ft =~ '\<smarty\>'
+    imap <buffer> <C-X>- <C-X><Lt><C-X>><Esc>i
+    imap <buffer> <C-X>_ <C-V><NL><Esc>I<C-X><Lt><Esc>A<C-X>><Esc>F<NL>s
   else
     imap <buffer> <C-X>- <C-X><Lt><Space><Space><C-X>><Esc>2hi
     imap <buffer> <C-X>_ <C-V><NL><Esc>I<C-X><Lt><Space><Esc>A<Space><C-X>><Esc>F<NL>s
@@ -138,7 +166,7 @@ function! s:Init()
     imap <buffer> <C-X>' <C-X><Lt>'<Space><Space><C-X>><Esc>2hi
     imap <buffer> <C-X>" <C-V><NL><Esc>I<C-X><Lt>'<Space><Esc>A<Space><C-X>><Esc>F<NL>s
     let b:surround_35 = maparg("<C-X><Lt>","i")."' \r ".maparg("<C-X>>","i")
-  elseif &ft == "jsp"
+  elseif &ft ==# 'jsp' || &filetype ==# 'gsp'
     inoremap <buffer> <C-X>'     <Lt>%--<Space><Space>--%><Esc>4hi
     inoremap <buffer> <C-X>"     <C-V><NL><Esc>I<%--<Space><Esc>A<Space>--%><Esc>F<NL>s
     let b:surround_35 = "<%-- \r --%>"
@@ -159,6 +187,10 @@ function! s:Init()
     inoremap <buffer> <C-X>'     {%<Space>comment<Space>%}{%<Space>endcomment<Space>%}<Esc>15hi
     inoremap <buffer> <C-X>"     <C-V><NL><Esc>I<C-X>{%<Space>comment<Space>%}<Esc>A{%<Space>endcomment<Space>%}<Esc>F<NL>s
     let b:surround_35 = "{% comment %}\r{% endcomment %}"
+  elseif &ft =~ '\<smarty\>'
+    inoremap <buffer> <C-X>'     {*<Space><Space>*}<Esc>2hi
+    inoremap <buffer> <C-X>"     <C-V><NL><Esc>I<C-X>{*<Space><Esc>A<Space>*}<Esc>F<NL>s
+    let b:surround_35 = "{* \r *}"
   else
     imap <buffer> <C-X>' <C-X><Lt>#<Space><Space><C-X>><Esc>2hi
     imap <buffer> <C-X>" <C-V><NL><Esc>I<C-X><Lt>#<Space><Esc>A<Space><C-X>><Esc>F<NL>s
@@ -175,9 +207,9 @@ function! s:Init()
       runtime! indent/html.vim
     endif
   endif
-  " Pet peeve.  Do people still not close their <p> and <li> tags?
   if exists("g:html_indent_tags") && g:html_indent_tags !~ '\\|p\>'
     let g:html_indent_tags = g:html_indent_tags.'\|p\|li\|dt\|dd'
+    let g:html_indent_tags = g:html_indent_tags.'\|article\|aside\|audio\|bdi\|canvas\|command\|datalist\|details\|figcaption\|figure\|footer\|header\|hgroup\|mark\|meter\|nav\|output\|progress\|rp\|rt\|ruby\|section\|summary\|time\|video'
   endif
   set indentkeys+=!^F
   let b:surround_indent = 1
