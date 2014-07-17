@@ -8,3 +8,4 @@ NERD_tree_*
 .project
 .settings
 target
+war/WEB-INF/classes/
