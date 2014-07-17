@@ -34,7 +34,7 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 " auto-strip trailing white space for ruby files
-" autocmd BufWritePre *.rb :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.rb,*.erb,*.haml,*.yml,*.coffee,*.js :call <SID>StripTrailingWhitespaces()
 
 " command to strip white space from any file
 nnoremap <leader>s :call <SID>StripTrailingWhitespaces()<cr>
