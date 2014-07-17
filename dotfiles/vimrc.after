@@ -1,3 +1,4 @@
+set vb
 " Default color scheme
 if has("gui_running")
   set background=dark
