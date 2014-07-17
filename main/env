@@ -51,4 +51,13 @@ for i in $HOME/dotfiles/bash-completion.d/*.sh ; do
     fi
 done
 
-export PATH=$HOME/bin:$PATH
+# The next line updates PATH for the Google Cloud SDK.
+[[ -s "$HOME/google-cloud-sdk/path.bash.inc" ]] && source "$HOME/google-cloud-sdk/path.bash.inc"
+
+# The next line enables bash completion for gcloud.
+[[ -s "$HOME/google-cloud-sdk/completion.bash.inc" ]] && source "$HOME/google-cloud-sdk/completion.bash.inc"
+
+export PATH="$HOME/bin:/usr/local/bin/:$PATH"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
