@@ -19,7 +19,7 @@ fi
 
 echo "$command";
 
-for i in `find . -maxdepth $depth -type d -not -name '.' | sort -n | egrep -v '\.(git|svn)' `; do 
+for i in `find . -maxdepth $depth \( -type d -o -type l \) -not -name '.' | egrep -v '\.(git|svn)' `; do 
   if [ -d "$i/$filter" ] ; then
     echo "$i";
     (
